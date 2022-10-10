@@ -1,0 +1,125 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: all 0.5s;
+}
+
+:root{
+    --w: calc(70vw / 6);
+    --h: calc(70vh / 4);
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background: rgb(21, 124, 110);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -webkit-perspective: 1000;
+}
+
+.header {
+    color: white;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    position: relative;
+}
+
+.header .d1{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.header .d2{
+    right: 0;
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+}
+
+.d1 h1{
+    text-align: center;
+}
+
+.d2 h1{
+    text-align: left;
+}
+
+.table {
+    width: 75%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.area-card,
+.card,
+.face{
+    width: var(--w);
+    height: var(--h);
+}
+
+.card {
+    position: relative;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+
+/* .area-card .card{
+    transform: rotateY(180deg);
+} */
+
+
+.face{
+    border-radius: 10px;
+    position: absolute;
+    font-size: 10vh;
+    box-shadow: inset 0 0 0 5px white ; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.front {
+    background: pink;
+    transform: rotateY(180deg);
+}
+
+.back{
+    background: orange;
+    backface-visibility: hidden;
+}
+
+.restart{
+    margin-top: 20px;
+}
+
+.restart button{
+    width: 200px;
+    height: 50px;
+    border-radius: 30%;
+    background-color: rgb(255, 165, 0);
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+.restart button:hover{
+    background-color: darkorange;
+}
+
+.card {
+ background: rgb(34, 205, 228) 
+}
