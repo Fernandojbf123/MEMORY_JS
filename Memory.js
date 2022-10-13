@@ -3,6 +3,11 @@
 const dButtonStart = document.getElementById("buttonstart")
 const dScore       = document.getElementById("score");
 
+let seconds = 0;
+let minutes = 0;
+let hours   = 0;
+let isTimerRunning = false
+
 let selections = []
 let points = 20; //score
 dScore.innerText = `Score: ${points}`;
@@ -27,6 +32,25 @@ const icons = [
 /* FUNCTIONS */    
 
 function handleStart () {
+
+    let dPair = document.getElementById("pair");
+    dPair.innerText = 0;
+
+    if (!isTimerRunning) {
+        isTimerRunning = !isTimerRunning;
+        let timer = window.setInterval(stopTimer,1000);
+    }
+    else {
+        window.clearInterval(timer)
+        hours   = 0;
+        minutes = 0;
+        seconds = 0; 
+        document.getElementById("timer").innerText= "00:00:00"
+    }
+    
+    
+    
+
     dButtonStart.style.background = "rgb(0,255,100)";
     setTimeout ( ( ) => {dButtonStart.style.background = "orange"},300)
     selections = []
@@ -69,12 +93,14 @@ function selectCard(i) {
         
         deSelect(selections)
         selections = [];
+
     }   
 }
 
 function deSelect (selections) {
   
-
+    let dPair  = document.getElementById("pair");
+    let pair   = dPair.innerText;
     let card1 = document.getElementById(`card${selections[0]}`)
     let card2 = document.getElementById(`card${selections[1]}`)
     
@@ -83,13 +109,15 @@ function deSelect (selections) {
 
     let front1 = card1.children[0];
     let front2 = card2.children[0];
-
+    
         if (ico1 == ico2) {
             setTimeout ( () => {
                 front1.style.background = "rgb(34, 205, 228)"
                 front2.style.background = "rgb(34, 205, 228)"
             },500)
             points = Number(points) + 5;
+            pair = Number(pair)+1;
+            dPair.innerText = pair;
         }
         else{
             setTimeout ( () => {
@@ -99,6 +127,34 @@ function deSelect (selections) {
             points = Number(points) - 3;   
         }
         dScore.innerText = `Score: ${points}`;
+        
 }
 
 
+function stopTimer () {
+    
+    if (seconds/60 == 1) {
+        seconds = 0
+        minutes++
+
+        if (minutes/60 == 1) {
+            minutes = 0 ;
+            hours++
+        }
+    }    
+    const dTimer       = document.getElementById("timer");
+
+    
+    if (pair.innerText < 12){
+        window.clearInterval(timer)
+
+        seconds++
+
+        let hh = hours.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+        let mm = minutes.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+        let ss = seconds.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+
+        dTimer.innerText   = hh + ":" + mm + ":" + ss;
+    }
+
+}
